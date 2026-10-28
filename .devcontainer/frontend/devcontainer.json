@@ -1,0 +1,16 @@
+
+{
+  "name": "Plataforma E-books - Frontend",
+  "dockerComposeFile": "../../compose.yaml",
+  "service": "frontend",
+  "workspaceFolder": "/workspace",
+  "runServices": ["frontend"],
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
