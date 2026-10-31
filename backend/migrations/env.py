@@ -22,7 +22,7 @@ def get_migrations_database_url():
 
     if not url:
         raise RuntimeError(
-            "MIGRATIONS_DATABASE_URL não foi configurada."
+            "MIGRATIONS_DATABASE_URL nao foi configurada."
         )
 
     if url.startswith("postgresql://"):
