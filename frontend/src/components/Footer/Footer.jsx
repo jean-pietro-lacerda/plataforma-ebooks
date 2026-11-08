@@ -6,11 +6,12 @@ export function Footer() {
     <footer className={styles.footerContainer}>
       <div className={styles.footerContent}>
         
-        {/* Informações Institucionais */}
+        {/* Informações do Projeto */}
         <div className={styles.footerInfo}>
-          <h3 className={styles.footerTitle}>Plataforma E-books UFCA</h3>
-          <p><strong>Universidade Federal do Cariri</strong></p>
-          <p>Pró-Reitoria de Pesquisa, Pós-graduação e Inovação (PRPI)</p>
+          <h3 className={styles.footerTitle}>Ebooks</h3>
+          <p><strong>Projeto acadêmico</strong></p>
+          <p>Desenvolvido na disciplina de Desenvolvimento de Software</p>
+          <p>Centro de Informática - UFPE </p>
         </div>
         
         {/* Links Rápidos */}
@@ -26,14 +27,10 @@ export function Footer() {
         
       </div>
       
-      {/* Direitos Autorais e Site */}
+      {/* Direitos Autorais*/}
       <div className={styles.footerBottom}>
         <p>
-          &copy; {new Date().getFullYear()} Plataforma de E-books UFCA. Todos os direitos reservados. 
-          <br /> {/* Quebra a linha para o site ficar embaixo */}
-          <a href="https://www.ufca.edu.br" target="_blank" rel="noopener noreferrer" className={styles.siteUrl}>
-            www.ufca.edu.br
-          </a>
+          &copy; {new Date().getFullYear()} Ebooks. Todos os direitos reservados.
         </p>
       </div>
     </footer>
