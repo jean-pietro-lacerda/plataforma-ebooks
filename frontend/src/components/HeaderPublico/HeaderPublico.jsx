@@ -11,9 +11,6 @@ export function HeaderPublico() {
       {/* Container da Logo + Texto da Universidade */}
       <div className={styles.logoBox}>
         <img src={logoImg} alt="Logo E-Books" className={styles.logoImg} />
-        <p className={styles.logoSubtitle}>
-          UNIVERSIDADE<br />FEDERAL DO CARIRI
-        </p>
       </div>
 
       <nav>

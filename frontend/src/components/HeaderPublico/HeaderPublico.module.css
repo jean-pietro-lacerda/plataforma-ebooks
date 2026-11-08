@@ -5,9 +5,7 @@
   
   padding: 15px 2% 15px 5%; 
   
-  background-color: #a1b365; 
-  border-bottom: 6px solid transparent;
-  border-image: linear-gradient(to right, #471a04, #e87c33, #f6ca56, #a1b365, #5fc3d9) 1;
+  background-color: #427689;
 }
 
 .logoBox {
@@ -15,7 +13,7 @@
   flex-direction: row; /* Coloca a logo e o texto lado a lado */
   align-items: center; /* Centraliza verticalmente */
   gap: 15px; /* Espaço entre a imagem e o texto da universidade */
-  color: #3e1b04; 
+  color: #ffffff; 
 }
 
 .logoImg {
@@ -28,7 +26,7 @@
   font-weight: 700;
   margin: 0; /* Remove margens para ficar alinhado com a imagem */
   letter-spacing: 0.5px;
-  color: #3e1b04;
+  color: #ffffff;
   line-height: 1.2; /* Deixa as duas linhas de texto mais unidas */
 }
 
@@ -46,17 +44,17 @@
   align-items: center;
 }
 
-/* Cria a barrinha | entre os itens com a cor marrom */
+/* Cria a barrinha | entre os itens com a cor branca */
 .navItem:not(:last-child)::after {
   content: "|";
   margin-left: 15px;
-  color: #3e1b04;
+  color: #ffffff;
   font-weight: bold;
 }
 
 .navLink {
   text-decoration: none;
-  color: #3e1b04; /* Textos do menu em marrom */
+  color: #ffffff; /* Textos do menu em branco */
   font-size: 1.15rem;
   font-weight: 500;
   transition: opacity 0.2s ease-in-out;
