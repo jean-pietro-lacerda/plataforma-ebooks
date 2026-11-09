@@ -10,6 +10,7 @@ import { Home } from './pages/public/Home/Home';
 import { Catalogo } from './pages/public/Catalogo/Catalogo';
 import { Faq } from './pages/public/Faq/Faq';
 import { Login } from './pages/public/Login/Login';
+import { LivroDetalhes } from './pages/public/LivroDetalhes/LivroDetalhes'; // <-- Novo import aqui
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/livro/:id" element={<LivroDetalhes />} /> {/* <-- Nova rota aqui */}
           </Routes>
         </main>
 

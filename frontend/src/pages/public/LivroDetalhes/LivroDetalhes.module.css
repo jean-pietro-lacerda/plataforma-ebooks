@@ -1,0 +1,94 @@
+.detalhesContainer {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.voltarLink {
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.voltarLink:hover {
+  color: #000;
+}
+
+.conteudoPrincipal {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Coluna da Esquerda (Capa, Autores, Botão) */
+.colunaEsquerda {
+  width: 350px; 
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.capaLivro {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  object-fit: cover;
+}
+
+.autoresBox {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.autoresBox strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.botaoBaixar {
+  display: block;
+  text-align: center;
+  background-color: #a1b365;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  width: max-content; 
+}
+
+.botaoBaixar:hover {
+  background-color: #8c9e56;
+}
+
+/* Coluna da Direita (Título e Sinopse) */
+.colunaDireita {
+  flex: 1;
+}
+
+.tituloLivro {
+  font-size: 2.2rem;
+  color: #111;
+  margin-top: 0;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.descricao {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333333;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
