@@ -82,14 +82,14 @@
 
 .apresentacaoTitulo {
   color: #427689; 
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   margin-bottom: 15px;
   font-weight: 500;
 }
 
 .apresentacaoTexto {
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 1.35rem;
+  line-height: 1.3;
   color: #333333;
   text-align: justify;
 }
