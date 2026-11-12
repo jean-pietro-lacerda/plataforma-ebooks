@@ -67,11 +67,11 @@ export function Home() {
       <section className={styles.apresentacao}>
         <h3 className={styles.apresentacaoTitulo}>Apresentação</h3>
         <p className={styles.apresentacaoTexto}>
-          A plataforma E-books é uma iniciativa da Pró-Reitoria de Pesquisa, Pós-graduação e Inovação (PRPI) da
-          Universidade Federal do Cariri (UFCA) que objetiva viabilizar a publicação digital e a divulgação de livros
-          acadêmicos. Aqui se encontram disponíveis para visualização e download as publicações eletrônicas
-          produzidas no âmbito da Universidade Federal do Cariri, abrindo-se um importante espaço digital para a
-          difusão de saberes a partir de textos de significativo valor científico, tecnológico e cultural.
+          Bem-vindo ao nosso universo de eBooks! Aqui, você encontra uma variedade de livros digitais para
+          explorar novos conhecimentos, descobrir histórias incríveis e mergulhar no mundo da leitura. Nossa
+          plataforma foi criada para oferecer uma experiência simples, prática e acessível, permitindo que você
+          encontre suas próximas leituras favoritas em poucos cliques. Explore nosso catálogo e descubra um
+          mundo de possibilidades a cada página!
         </p>
       </section>
 

@@ -36,14 +36,18 @@
 }
 
 .carrosselTitulo {
+  font-family: sans-serif;
   font-size: 2rem;
   margin: 0 0 10px 0;
+  font-weight: normal;
 }
 
 .carrosselSubtitulo {
+  font-family: sans-serif;
   font-size: 1.1rem;
   margin: 0;
   opacity: 0.9;
+  font-weight: normal;
 }
 
 .seta {
@@ -77,7 +81,7 @@
 }
 
 .apresentacaoTitulo {
-  color: #111111; 
+  color: #427689; 
   font-size: 1.6rem;
   margin-bottom: 15px;
   font-weight: 500;

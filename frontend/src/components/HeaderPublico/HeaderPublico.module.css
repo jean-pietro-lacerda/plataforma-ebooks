@@ -35,7 +35,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 15px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -44,22 +44,26 @@
   align-items: center;
 }
 
-/* Cria a barrinha | entre os itens com a cor branca */
-.navItem:not(:last-child)::after {
-  content: "|";
-  margin-left: 15px;
-  color: #ffffff;
-  font-weight: bold;
-}
-
 .navLink {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   text-decoration: none;
-  color: #ffffff; /* Textos do menu em branco */
+  color: #ffffff;
   font-size: 1.15rem;
   font-weight: 500;
+  line-height: 1;
   transition: opacity 0.2s ease-in-out;
 }
 
 .navLink:hover {
   opacity: 0.6; /* Deixa o texto levemente transparente ao passar o mouse */
+}
+
+.navIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
 }
