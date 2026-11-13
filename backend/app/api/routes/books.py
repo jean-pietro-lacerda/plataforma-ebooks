@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Query, Request
+from fastapi import APIRouter, Path, Query, Request
 
 from app.schemas.books import BookListResponse, BookResponse
 from app.services.gutendex import fetch_book_by_id, fetch_books
@@ -34,10 +34,13 @@ async def list_books(
         default=None,
         description="Texto de busca repassado ao Gutendex (título, autor, etc.)",
     ),
+    page: int | None = Query(default=None, ge=1),
 ) -> BookListResponse:
     params = _forward_query_params(request)
     if search is not None:
         params["search"] = search
+    if page is not None:
+        params["page"] = page
     return await fetch_books(params=params)
 
 
@@ -54,5 +57,5 @@ async def list_books(
         503: {"description": "Gutendex indisponível, em timeout ou com erro"},
     },
 )
-async def get_book(book_id: int) -> BookResponse:
+async def get_book(book_id: int = Path(gt=0)) -> BookResponse:
     return await fetch_book_by_id(book_id)

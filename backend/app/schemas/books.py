@@ -16,6 +16,10 @@ class BookResponse(BaseModel):
         default=None,
         description="Link de download preferencial (EPUB ou HTML)",
     )
+    url_pagina_oficial: str | None = Field(
+        default=None,
+        description="Página oficial do livro no Project Gutenberg",
+    )
 
 
 class BookListResponse(BaseModel):

@@ -33,7 +33,20 @@ def _pick_download_url(formats: dict[str, str]) -> str | None:
 
 
 def normalize_book(raw: dict[str, Any]) -> BookResponse:
-    formats = raw.get("formats") or {}
+    if not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] <= 0:
+        raise ValueError("Identificador de livro inválido na resposta externa")
+    if raw.get("title") is not None and not isinstance(raw["title"], str):
+        raise ValueError("Título inválido na resposta externa")
+    if raw.get("authors") is not None and not isinstance(raw["authors"], list):
+        raise ValueError("Autores inválidos na resposta externa")
+    formats = raw.get("formats")
+    if formats is None:
+        formats = {}
+    if not isinstance(formats, dict) or any(
+        not isinstance(mime, str) or not isinstance(url, str)
+        for mime, url in formats.items()
+    ):
+        raise ValueError("Formatos inválidos na resposta externa")
     authors = [
         author.get("name", "").strip()
         for author in (raw.get("authors") or [])
@@ -46,12 +59,19 @@ def normalize_book(raw: dict[str, Any]) -> BookResponse:
         autores=authors,
         url_capa=_pick_cover_url(formats),
         link_download=_pick_download_url(formats),
+        url_pagina_oficial=f"https://www.gutenberg.org/ebooks/{raw['id']}",
     )
 
 
 def normalize_book_list(raw: dict[str, Any]) -> BookListResponse:
+    if (
+        type(raw.get("count")) is not int
+        or raw["count"] < 0
+        or not isinstance(raw.get("results"), list)
+    ):
+        raise ValueError("Listagem inválida na resposta externa")
     return BookListResponse(
-        count=raw.get("count", 0),
+        count=raw["count"],
         next=raw.get("next"),
         previous=raw.get("previous"),
         results=[normalize_book(item) for item in (raw.get("results") or [])],
@@ -72,7 +92,13 @@ async def _get_json(path: str, params: dict[str, Any] | None = None) -> dict[str
         async with httpx.AsyncClient(timeout=GUTENDEX_TIMEOUT) as client:
             response = await client.get(url, params=params or None)
             response.raise_for_status()
-            return response.json()
+            data = response.json()
+            if not isinstance(data, dict):
+                raise ValueError("Objeto JSON esperado na resposta externa")
+            return data
+
+    except ValueError:
+        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
 
     except httpx.TimeoutException:
         _raise_service_unavailable(
@@ -86,7 +112,17 @@ async def _get_json(path: str, params: dict[str, Any] | None = None) -> dict[str
         if upstream_status == status.HTTP_404_NOT_FOUND:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail="Livro não encontrado no catálogo externo.",
+                detail=(
+                    "Página não encontrada no catálogo externo."
+                    if path == "/books/"
+                    else "Livro não encontrado no catálogo externo."
+                ),
+            ) from exc
+
+        if upstream_status == status.HTTP_400_BAD_REQUEST:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Parâmetros inválidos para a consulta ao catálogo externo.",
             ) from exc
 
         _raise_service_unavailable(
@@ -102,9 +138,15 @@ async def _get_json(path: str, params: dict[str, Any] | None = None) -> dict[str
 
 async def fetch_books(params: dict[str, Any] | None = None) -> BookListResponse:
     raw = await _get_json("/books/", params=params)
-    return normalize_book_list(raw)
+    try:
+        return normalize_book_list(raw)
+    except (KeyError, TypeError, AttributeError, ValueError):
+        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
 
 
 async def fetch_book_by_id(book_id: int) -> BookResponse:
     raw = await _get_json(f"/books/{book_id}/")
-    return normalize_book(raw)
+    try:
+        return normalize_book(raw)
+    except (KeyError, TypeError, AttributeError, ValueError):
+        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
