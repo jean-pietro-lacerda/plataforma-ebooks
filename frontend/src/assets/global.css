@@ -4,8 +4,22 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Gelasio';
+  src: url('./fonts/gelasio/Gelasio-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gelasio';
+  src: url('./fonts/gelasio/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: italic;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; /* Pode ajustar a fonte padrão da UFCA aqui futuramente */
+  font-family: 'Gelasio', Georgia, serif; /*Fonte do prototipo adicionada*/
 }

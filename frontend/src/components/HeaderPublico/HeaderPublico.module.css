@@ -1,3 +1,45 @@
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-reg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-lt.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-it.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-ltit.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'The Seasons';
+  src: url('../../assets/fonts/theseasons/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
 .headerContainer {
   display: flex;
   justify-content: space-between;
@@ -5,9 +47,7 @@
   
   padding: 15px 2% 15px 5%; 
   
-  background-color: #a1b365; 
-  border-bottom: 6px solid transparent;
-  border-image: linear-gradient(to right, #471a04, #e87c33, #f6ca56, #a1b365, #5fc3d9) 1;
+  background-color: #427689;
 }
 
 .logoBox {
@@ -15,7 +55,7 @@
   flex-direction: row; /* Coloca a logo e o texto lado a lado */
   align-items: center; /* Centraliza verticalmente */
   gap: 15px; /* Espaço entre a imagem e o texto da universidade */
-  color: #3e1b04; 
+  color: #ffffff; 
 }
 
 .logoImg {
@@ -28,7 +68,7 @@
   font-weight: 700;
   margin: 0; /* Remove margens para ficar alinhado com a imagem */
   letter-spacing: 0.5px;
-  color: #3e1b04;
+  color: #ffffff;
   line-height: 1.2; /* Deixa as duas linhas de texto mais unidas */
 }
 
@@ -37,7 +77,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 15px;
+  gap: 30px;
   align-items: center;
 }
 
@@ -46,22 +86,45 @@
   align-items: center;
 }
 
-/* Cria a barrinha | entre os itens com a cor marrom */
-.navItem:not(:last-child)::after {
-  content: "|";
-  margin-left: 15px;
-  color: #3e1b04;
-  font-weight: bold;
-}
-
 .navLink {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   text-decoration: none;
-  color: #3e1b04; /* Textos do menu em marrom */
-  font-size: 1.15rem;
-  font-weight: 500;
+  color: #ffffff;
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
   transition: opacity 0.2s ease-in-out;
 }
 
 .navLink:hover {
   opacity: 0.6; /* Deixa o texto levemente transparente ao passar o mouse */
+}
+
+.navIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .headerContainer {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px 5%;
+  }
+
+  .headerContainer nav {
+    width: 100%;
+  }
+
+  .navMenu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px 30px;
+  }
 }
