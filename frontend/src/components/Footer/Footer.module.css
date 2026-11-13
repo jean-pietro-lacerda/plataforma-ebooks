@@ -18,7 +18,8 @@
 
 .footerInfo {
   flex: 0 0 250px;
-  min-width: 250px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .footerContactList {
@@ -41,9 +42,9 @@
 }
 
 .footerMap {
-  flex: 0 0 380px;
-  min-width: 280px;
-  max-width: 420px;
+  flex: 0 1 380px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .footerMap iframe {

@@ -6,14 +6,14 @@
 
 @font-face {
   font-family: 'Gelasio';
-  src: url('./fonts/Gelasio/Gelasio-VariableFont_wght.ttf') format('truetype');
+  src: url('./fonts/gelasio/Gelasio-VariableFont_wght.ttf') format('truetype');
   font-weight: 400 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gelasio';
-  src: url('./fonts/Gelasio/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('./fonts/gelasio/Gelasio-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: 400 700;
   font-style: italic;
 }
