@@ -5,6 +5,8 @@ class Settings(BaseSettings):
     database_url: str | None = None
     migrations_database_url: str | None = None
 
+    news_upload_dir: str = "/workspace/storage/uploads"
+
     jwt_secret_key: str | None = None
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
