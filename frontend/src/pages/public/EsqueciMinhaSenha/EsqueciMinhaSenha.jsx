@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './EsqueciMinhaSenha.module.css';
 
 export function EsqueciMinhaSenha() {
@@ -9,8 +8,8 @@ export function EsqueciMinhaSenha() {
       </div>
       <section className={styles.conteudoPrincipal}>
       <div className={styles.formEsqueciMinhaSenha}>
-        <h3 className={styles.tituloInputEsqueciMinhaSenha}>Email</h3>
-        <input className={styles.inputEsqueciMinhaSenha}></input>
+        <label htmlFor="recuperacao-email" className={styles.tituloInputEsqueciMinhaSenha}>Email</label>
+        <input id="recuperacao-email" type="email" className={styles.inputEsqueciMinhaSenha} />
         <a className={styles.botaoEsqueciMinhaSenha}>Confirmar</a>
       </div>
       </section>

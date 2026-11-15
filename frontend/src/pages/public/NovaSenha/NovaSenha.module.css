@@ -2,7 +2,7 @@
   display: flex;
   gap: 40px;
   align-items: center;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 15px auto 0 auto;
   flex-wrap: wrap;
 
@@ -30,11 +30,10 @@
   flex-direction: column;
   justify-content: center;
   width: 100%; /* Largura base semelhante à do protótipo */
-  height: fill;
   border-radius: 1rem;
   border-color: #427689;
   border-style: outset;
-  border-width: 0.15rem;  
+  border-width: 0.15rem;
   border-top-width: 0.8rem;
   overflow: hidden;
   background-color: #ffffff;
@@ -44,6 +43,8 @@
 
 .tituloInputNovaSenha {
   padding: 10px 15px;
+  font-size: 1.17em;
+  font-weight: bold;
 }
 .inputNovaSenha {
   padding: 10px 15px;
