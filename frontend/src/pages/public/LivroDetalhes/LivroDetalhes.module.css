@@ -72,6 +72,8 @@
 
 /* Coluna da Direita (Título e Sinopse) */
 .colunaDireita {
+  min-width: 0;
+  overflow-wrap: anywhere;
   flex: 1;
 }
 
@@ -91,4 +93,19 @@
   display: flex;
   flex-direction: column;
   gap: 15px; 
+}
+
+@media (max-width: 768px) {
+  .conteudoPrincipal {
+    flex-direction: column;
+  }
+
+  .colunaEsquerda {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .botaoBaixar {
+    max-width: 100%;
+  }
 }
