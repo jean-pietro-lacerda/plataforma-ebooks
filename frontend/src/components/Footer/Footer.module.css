@@ -1,90 +1,72 @@
 .footerContainer {
-  background-color: #3e1b04; /* Marrom profundo alinhado com a paleta da UFCA */
+  background-color: #427689; /* Mudado de marrom pra azul */
   color: #ffffff;
-  padding: 40px 5% 20px 5%;
+  padding: 18px 5%;
   margin-top: auto;
   
-  /* Adiciona a mesma linha colorida do cabeçalho, mas agora na parte de cima (top) */
-  border-top: 4px solid transparent;
-  border-image: linear-gradient(to right, #471a04, #e87c33, #f6ca56, #a1b365, #5fc3d9) 1;
 }
 
 .footerContent {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 70px;
   max-width: 1200px;
   margin: 0 auto;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 30px;
+  align-items: flex-start;
 }
 
 .footerInfo {
-  flex: 1;
-  min-width: 280px;
+  flex: 0 0 250px;
+  min-width: 0;
+  max-width: 100%;
 }
 
-.footerTitle {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #a1b365; /* O mesmo verde do cabeçalho para criar unidade visual */
-}
-
-.footerInfo p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #cccccc;
-  margin: 5px 0;
-}
-
-.footerLinks {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footerLinks h4 {
-  color: #a1b365; /* O mesmo verde do cabeçalho */
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-}
-
-.footerLinks ul {
+.footerContactList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footerLinks li {
-  margin-bottom: 12px;
-}
-
-.footerLinks a {
+.footerContactList a {
+  color: #ffffff;
   text-decoration: none;
-  color: #cccccc;
-  transition: color 0.3s;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.footerLinks a:hover {
-  color: #93c049;
+.footerContactList a:hover {
+  text-decoration: underline;
+}
+
+.footerMap {
+  flex: 0 1 380px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.footerMap iframe {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.footerTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
 .footerBottom {
   text-align: center;
-  padding-top: 20px;
-  font-size: 0.85rem;
-  color: #888888;
-}
-
-.siteUrl {
-  color: #a1b365;
-  text-decoration: none;
-  font-weight: 600;
-  transition: opacity 0.3s;
-}
-
-.siteUrl:hover {
-  opacity: 0.7;
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
+  color: #cccccc;
 }
