@@ -26,7 +26,7 @@ export function Faq() {
           </summary>
             <div>
               <p className={styles.faqP}>
-                Somente administradores podem publicar livros.
+                Os e-books são consultados no catálogo do Project Gutenberg. A publicação de livros próprios ainda não está disponível na plataforma.
               </p>
             </div>
         </details>
