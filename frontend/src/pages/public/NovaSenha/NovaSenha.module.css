@@ -64,6 +64,7 @@
 
   /* 3) give it real size so "centered" is visible */
   width: 15%;
+  min-width: max-content;
   min-height: 40px;
   padding: 8px 16px;
   box-sizing: border-box;
