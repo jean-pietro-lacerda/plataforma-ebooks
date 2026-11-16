@@ -1,71 +1,77 @@
+import { useSearchParams } from 'react-router-dom';
 import styles from './Catalogo.module.css';
 import { LivroCard } from '../../../components/LivroCard/LivroCard';
+import { useApiData } from '../../../hooks/useApiData';
 
-// Lista de temas baseada no protótipo
+// Rotulos do prototipo associados aos assuntos pesquisaveis no Gutendex.
 const TEMAS = [
-  "Artes", "Biologia", "Culinária", "Filosofia", 
-  "Física", "Geografia", "Gramática", "História", 
-  "Literatura", "Matemática", "Música", "Química"
-];
-
-// Dados provisórios para visualizarmos a grelha
-const LIVROS_EXEMPLO = [
-  { id: 1, titulo: "Artes: Propostas...", capa: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=300&auto=format&fit=crop" },
-  { id: 2, titulo: "Biologia Marinha", capa: "https://images.unsplash.com/photo-1582967201267-27a3f3b64c01?q=80&w=300&auto=format&fit=crop" },
-  { id: 3, titulo: "A ciência da co...", capa: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=300&auto=format&fit=crop" },
-  { id: 4, titulo: "A metafísica dos...", capa: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=300&auto=format&fit=crop" },
-  { id: 5, titulo: "A história da físi...", capa: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=300&auto=format&fit=crop" },
-  { id: 6, titulo: "Geografia Física", capa: "https://images.unsplash.com/photo-1529156069898-49953eb1b5b6?q=80&w=300&auto=format&fit=crop" },
-  { id: 7, titulo: "A história do Bra...", capa: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=300&auto=format&fit=crop" },
-  { id: 8, titulo: "A hora da estrela", capa: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=300&auto=format&fit=crop" }
+  ['Artes', 'art'], ['Biologia', 'biology'], ['Culinária', 'cookery'],
+  ['Filosofia', 'philosophy'], ['Física', 'physics'], ['Geografia', 'geography'],
+  ['Gramática', 'grammar'], ['História', 'history'], ['Literatura', 'literature'],
+  ['Matemática', 'mathematics'], ['Música', 'music'], ['Química', 'chemistry'],
 ];
 
 export function Catalogo() {
+  const [parameters, setParameters] = useSearchParams();
+  const search = parameters.get('search') || '';
+  const topic = parameters.get('topic') || '';
+  const requestedPage = Number(parameters.get('page') || 1);
+  const page = Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const query = new URLSearchParams({ page: String(page) });
+  if (search) query.set('search', search);
+  if (topic) query.set('topic', topic);
+  const { data, loading, error, reload } = useApiData('/books?' + query);
+
+  function update(name, value) {
+    setParameters((previous) => {
+      const next = new URLSearchParams(previous);
+      if (value) next.set(name, value);
+      else next.delete(name);
+      if (name !== 'page') next.delete('page');
+      return next;
+    });
+  }
+  function pesquisar(event) {
+    event.preventDefault();
+    update('search', new FormData(event.currentTarget).get('search').trim());
+  }
   return (
     <div className={styles.catalogoContainer}>
-      
-      {/* Barra Lateral de Filtros */}
       <aside className={styles.sidebar}>
         <h3 className={styles.tituloSidebar}>Temas</h3>
         <ul className={styles.listaTemas}>
-          {TEMAS.map((tema) => (
-            <li key={tema} className={styles.temaItem}>
-              {tema}
+          <li><button type="button" aria-pressed={!topic} className={styles.temaItem + (!topic ? ' ' + styles.temaAtivo : '')} onClick={() => update('topic', '')}>Todos os temas</button></li>
+          {TEMAS.map(([label, value]) => (
+            <li key={value}>
+              <button type="button" aria-pressed={topic === value} className={styles.temaItem + (topic === value ? ' ' + styles.temaAtivo : '')} onClick={() => update('topic', value)}>{label}</button>
             </li>
           ))}
         </ul>
       </aside>
-
-      {/* Conteúdo Central */}
-      <section className={styles.conteudoPrincipal}>
-        
-        {/* Cabeçalho com Título e Busca */}
+      <section className={styles.conteudoPrincipal} aria-busy={loading}>
         <div className={styles.cabecalhoConteudo}>
           <h2 className={styles.tituloPagina}>Catálogo de Livros</h2>
-          
-          <div className={styles.buscaContainer}>
-            <input 
-              type="text" 
-              placeholder="Pesquise aqui..." 
-              className={styles.inputBusca}
-            />
+          <form key={search} className={styles.buscaContainer} onSubmit={pesquisar} role="search">
+            <label className={styles.rotuloBusca} htmlFor="catalogo-busca">Pesquisar por título ou autor</label>
+            <input id="catalogo-busca" name="search" type="search" placeholder="Pesquise aqui..." defaultValue={search} className={styles.inputBusca} />
+            <button type="submit" className={styles.botao}>Pesquisar</button>
+          </form>
+        </div>
+        {loading && <p role="status">Carregando livros...</p>}
+        {error && <div role="alert"><p>{error}</p><button type="button" className={styles.botao} onClick={reload}>Tentar novamente</button></div>}
+        {data && <>
+          <p role="status">{data.count} livro(s) encontrado(s).</p>
+          {data.results.length === 0 && <p>Nenhum livro encontrado para esta pesquisa.</p>}
+          <div className={styles.gradeLivros}>
+            {data.results.map((livro) => <LivroCard key={livro.id} id={livro.id} titulo={livro.titulo} capaUrl={livro.url_capa} />)}
           </div>
-        </div>
-
-        {/* Grelha de Livros */}
-        <div className={styles.gradeLivros}>
-          {LIVROS_EXEMPLO.map((livro) => (
-            <LivroCard 
-              key={livro.id} 
-              id={livro.id} 
-              titulo={livro.titulo} 
-              capaUrl={livro.capa} 
-            />
-          ))}
-        </div>
-
+          <nav className={styles.paginacao} aria-label="Páginas do catálogo">
+            <button type="button" className={styles.botao} disabled={!data.previous || page === 1} onClick={() => update('page', String(page - 1))}>Anterior</button>
+            <span>Página {page}</span>
+            <button type="button" className={styles.botao} disabled={!data.next} onClick={() => update('page', String(page + 1))}>Próxima</button>
+          </nav>
+        </>}
       </section>
-
     </div>
   );
 }
