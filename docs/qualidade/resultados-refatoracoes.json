@@ -1,0 +1,69 @@
+{
+  "commits": {
+    "DT-03": "df44893",
+    "DT-02": "37a00eb",
+    "DT-01": "d23fd15"
+  },
+  "runs": {
+    "antes": {
+      "phase": "antes",
+      "generated": 78,
+      "passed": 78,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lines_hit": 204,
+      "lines_total": 224,
+      "branches_hit": 39,
+      "branches_total": 44,
+      "exit_code": 0,
+      "line_percent": 91.07,
+      "branch_percent": 88.64
+    },
+    "DT-01": {
+      "phase": "DT-01",
+      "generated": 78,
+      "passed": 78,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lines_hit": 206,
+      "lines_total": 226,
+      "branches_hit": 39,
+      "branches_total": 44,
+      "exit_code": 0,
+      "line_percent": 91.15,
+      "branch_percent": 88.64
+    },
+    "DT-02": {
+      "phase": "DT-02",
+      "generated": 78,
+      "passed": 78,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lines_hit": 207,
+      "lines_total": 227,
+      "branches_hit": 39,
+      "branches_total": 44,
+      "exit_code": 0,
+      "line_percent": 91.19,
+      "branch_percent": 88.64
+    },
+    "DT-03": {
+      "phase": "DT-03",
+      "generated": 78,
+      "passed": 78,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lines_hit": 208,
+      "lines_total": 228,
+      "branches_hit": 39,
+      "branches_total": 44,
+      "exit_code": 0,
+      "line_percent": 91.23,
+      "branch_percent": 88.64
+    }
+  }
+}

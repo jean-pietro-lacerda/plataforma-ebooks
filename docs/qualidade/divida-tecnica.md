@@ -4,9 +4,9 @@ Escopo: modulos das tres historias selecionadas; leitura dirigida assistida por 
 
 | ID | Local | Problema / categoria | Consequencia concreta | Descoberta | Status |
 |---|---|---|---|---|---|
-| DT-01 | backend/app/services/gutendex.py:35 normalize_book | Validacao de formatos misturada a normalizacao; SRP/coesao | 29 linhas e cinco decisoes AST misturam duas regras que mudam separadamente | Leitura + AST + LLM | Aberto |
-| DT-02 | gutendex.py _get_json/fetch_books/fetch_book_by_id | Mensagem identica repetida 3 vezes; Duplicated Code/integridade conceitual | Alteracao de texto pode divergir entre lista, detalhe e JSON invalido | Contagem de literais + leitura + LLM | Aberto |
-| DT-03 | api/routes/news.py list_news/list_admin_news | Politica 100 repetida em defaults e validacao; Magic Literal | Limites publico e administrativo podem divergir numa manutencao | Leitura + ocorrencias Query + LLM | Aberto |
+| DT-01 | backend/app/services/gutendex.py:35 normalize_book | Validacao de formatos misturada a normalizacao; SRP/coesao | 29 linhas e cinco decisoes AST misturam duas regras que mudam separadamente | Leitura + AST + LLM | Refatorado (d23fd15) |
+| DT-02 | gutendex.py _get_json/fetch_books/fetch_book_by_id | Mensagem identica repetida 3 vezes; Duplicated Code/integridade conceitual | Alteracao de texto pode divergir entre lista, detalhe e JSON invalido | Contagem de literais + leitura + LLM | Refatorado (37a00eb) |
+| DT-03 | api/routes/news.py list_news/list_admin_news | Politica 100 repetida em defaults e validacao; Magic Literal | Limites publico e administrativo podem divergir numa manutencao | Leitura + ocorrencias Query + LLM | Refatorado (df44893) |
 | DT-04 | gutendex.py:88 _get_json | Cliente HTTP concreto criado dentro da operacao; acoplamento/DIP | Testes precisam substituir globalmente AsyncClient; mudar transporte exige editar servico | Leitura dos testes e imports AST + LLM | Aberto |
 | DT-05 | api/routes/news.py:78 upload_image | HTTP, arquivo e transacao no mesmo procedimento; SRP | Alterar persistencia exige revisar fechamento de arquivo e rollback juntos | Leitura dirigida + LLM | Aberto |
 | DT-06 | api/routes/news.py create_news/update_news | Sequencia commit/refresh repetida; duplicacao/coesao | Politica de persistencia deve ser mantida em dois manipuladores HTTP | Leitura + AST + LLM | Aberto |
@@ -24,3 +24,14 @@ DT-03: dar nome a politica repetida. A v2 adicionou ANTES os limites publico e a
 - PATCH vazio nao e defeito confirmado: contrato permite ausencia de alteracoes.
 - Titulo com espacos nao e defeito confirmado: requisito diz comprimento, nao exige trim.
 - Falhas de infraestrutura externa nao foram tratadas como code smell ou defeito funcional desta atividade.
+
+## Evidencias dos testes e commits
+
+| Etapa | Passam/falham/erros | Linhas | Branches | Commit |
+|---|---|---|---|---|
+| antes | 78/0/0 | 91.07% | 88.64% | baseline v2 |
+| DT-01 | 78/0/0 | 91.15% | 88.64% | d23fd15 |
+| DT-02 | 78/0/0 | 91.19% | 88.64% | 37a00eb |
+| DT-03 | 78/0/0 | 91.23% | 88.64% | df44893 |
+
+DT-01 usa Extract Function; DT-02 Extract Constant para mensagem duplicada; DT-03 Replace Magic Literal para politica compartilhada. Cinco itens permanecem abertos. Todos os oraculos HTTP e dados passaram antes/depois. Nenhum teste precisou ser enfraquecido. Evidencias completas em docs/testes/relatorios/refatoracao-*/.

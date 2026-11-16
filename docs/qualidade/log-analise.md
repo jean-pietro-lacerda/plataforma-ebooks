@@ -18,3 +18,6 @@ Resposta: formulario, consulta, pagina e upload compartilham estado/modulo (DT-0
 Confirmacao: trechos lidos diretamente e contrastados com evidencias AST. A ferramenta mede sinais locais; leitura e LLM relacionam consequencias e contratos. Oito itens registrados; apenas DT-01/02/03 selecionados. Demais permanecem abertos. Nao foi encontrada violacao LSP/ISP que pudesse ser afirmada honestamente.
 
 Teste anterior: v2 e executada explicitamente como fase 'antes', sem testes antigos de integracao funcional. Testes depois: fases DT-01, DT-02 e DT-03, sempre os mesmos 78 casos. Novos testes de caracterizacao ja estavam na v2 antes de refatorar; nenhum trecho selecionado fica sem protecao relevante.
+
+## Resultado final
+DT-01=d23fd15; DT-02=37a00eb; DT-03=df44893. V2: 78/78 antes e apos cada alteracao. Sem falhas, sem alteracao de oraculos, cinco dividas abertas. Aumento pequeno de linhas decorre de helpers/constantes, nao de novos requisitos.

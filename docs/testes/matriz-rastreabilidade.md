@@ -123,14 +123,14 @@ A matriz acima é um **plano de casos**, não uma suíte executada. Ao rodar cad
 
 | Indicador | v1 (LLM) | v2 (melhorada) |
 |---|:---:|:---:|
-| Testes gerados / passando / falhando / não compilam | — | — |
-| Cobertura de linhas (%) | — | — |
-| Cobertura de branches (%) | — | — |
-| Cobertura de critérios (%) | — | — |
-| Partições cobertas (%) | — | — |
-| Valores-limite cobertos (%) | — | — |
-| Testes sem asserção / trivial | — | — |
-| Defeitos reais encontrados | — | — |
+| Testes gerados / passando / falhando / não compilam | 25/25/0/0 | 78/78/0/0 |
+| Cobertura de linhas (%) | 79,46% | 91,07% |
+| Cobertura de branches (%) | 54,55% | 88,64% |
+| Cobertura de critérios (%) | 100% (12/12) | 100% (12/12) |
+| Partições cobertas (%) | 91,67% (33/36) | 100% (36/36) |
+| Valores-limite cobertos (%) | 81,25% (13/16) | 100% (16/16) |
+| Testes sem asserção / trivial | 0/0 | 0/0 |
+| Defeitos reais encontrados | 0 | 0 |
 
 **Sequência exigida:** revisar a matriz com a equipe → fazer commit de `docs/testes/matriz-rastreabilidade.md` → pedir à LLM a v1 *sem mostrar a matriz* (usar somente critérios/user stories e módulos) → preservar v1 → executar e medir → melhorar v2 → relatório crítico em PDF → análise de dívida técnica e três refatorações com testes v2.
 
