@@ -1,0 +1,63 @@
+{
+  "v1": {
+    "phase": "v1",
+    "generated": 25,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "lines_hit": 178,
+    "lines_total": 224,
+    "branches_hit": 24,
+    "branches_total": 44,
+    "exit_code": 0,
+    "line_percent": 79.46,
+    "branch_percent": 54.55
+  },
+  "v2": {
+    "phase": "v2",
+    "generated": 78,
+    "passed": 78,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "lines_hit": 204,
+    "lines_total": 224,
+    "branches_hit": 39,
+    "branches_total": 44,
+    "exit_code": 0,
+    "line_percent": 91.07,
+    "branch_percent": 88.64
+  },
+  "assertions_v1": {
+    "functions": 15,
+    "without_assert": 0,
+    "trivial": 0,
+    "status_only": 8
+  },
+  "assertions_v2": {
+    "functions": 32,
+    "without_assert": 0,
+    "trivial": 0,
+    "status_only": 12
+  },
+  "criteria": [
+    12,
+    12,
+    12
+  ],
+  "partitions": [
+    33,
+    36,
+    36
+  ],
+  "limits": [
+    13,
+    16,
+    16
+  ],
+  "real_defects": [
+    0,
+    0
+  ]
+}

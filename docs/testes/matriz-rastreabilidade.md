@@ -76,46 +76,46 @@ Como administrador, quero cadastrar, editar, publicar, despublicar e excluir not
 
 | Caso | Critério | Variável | Partição / limite | Entrada / cenário | Resultado esperado (oráculo) | v1 | v2 |
 |---|---|---|---|---|---|:---:|:---:|
-| CT-01-01 | CA-01.1 | search | texto informado | GET /books?search=historia, com Gutendex simulado | 200; parametro repassado; lista com count, next, previous e results | — | — |
-| CT-01-02 | CA-01.1 | search | ausente | GET /books, com Gutendex simulado | 200; listagem sem filtro de busca | — | — |
-| CT-01-03 | CA-01.2 | page | limite válido: 1 | GET /books?page=1 | 200; pagina 1 aceita | — | — |
-| CT-01-04 | CA-01.2 | page | fora do limite: 0 | GET /books?page=0 | 422; valor rejeitado | — | — |
-| CT-01-05 | CA-01.3 | book_id | válido: inteiro positivo | GET /books/1; simular livro existente | 200; dados de id, titulo, autores e links opcionais | — | — |
-| CT-01-06 | CA-01.3 | book_id | limite inválido: 0 | GET /books/0 | 422; ID rejeitado | — | — |
-| CT-01-07 | CA-01.3 | book_id | positivo inexistente | GET /books/999999; simular não encontrado | 404; livro não encontrado | — | — |
-| CT-01-08 | CA-01.4 | link_download | link presente | GET /books/1; mock com link_download | 200; JSON preserva o link de acesso digital | — | — |
-| CT-01-09 | CA-01.4 | Gutendex | indisponível | GET /books/1; simular indisponibilidade externa | 503; falha de serviço externo | — | — |
+| CT-01-01 | CA-01.1 | search | texto informado | GET /books?search=historia, com Gutendex simulado | 200; parametro repassado; lista com count, next, previous e results | Sim | Sim |
+| CT-01-02 | CA-01.1 | search | ausente | GET /books, com Gutendex simulado | 200; listagem sem filtro de busca | Parcial | Sim |
+| CT-01-03 | CA-01.2 | page | limite válido: 1 | GET /books?page=1 | 200; pagina 1 aceita | Sim | Sim |
+| CT-01-04 | CA-01.2 | page | fora do limite: 0 | GET /books?page=0 | 422; valor rejeitado | Sim | Sim |
+| CT-01-05 | CA-01.3 | book_id | válido: inteiro positivo | GET /books/1; simular livro existente | 200; dados de id, titulo, autores e links opcionais | Sim | Sim |
+| CT-01-06 | CA-01.3 | book_id | limite inválido: 0 | GET /books/0 | 422; ID rejeitado | Sim | Sim |
+| CT-01-07 | CA-01.3 | book_id | positivo inexistente | GET /books/999999; simular não encontrado | 404; livro não encontrado | Sim | Sim |
+| CT-01-08 | CA-01.4 | link_download | link presente | GET /books/1; mock com link_download | 200; JSON preserva o link de acesso digital | Sim | Sim |
+| CT-01-09 | CA-01.4 | Gutendex | indisponível | GET /books/1; simular indisponibilidade externa | 503; falha de serviço externo | Sim | Sim |
 
 ### US-02
 
 | Caso | Critério | Variável | Partição / limite | Entrada / cenário | Resultado esperado (oráculo) | v1 | v2 |
 |---|---|---|---|---|---|:---:|:---:|
-| CT-02-01 | CA-02.1 | publicada | true e false | GET /news com uma publicada e outra rascunho | 200; apenas a publicada na lista | — | — |
-| CT-02-02 | CA-02.2 | news_id | publicada existente | GET /news/{id_publicada} | 200; dados da notícia | — | — |
-| CT-02-03 | CA-02.2 | news_id | não publicada | GET /news/{id_rascunho} | 404; sem exposição do rascunho | — | — |
-| CT-02-04 | CA-02.3 | publicada; destaque; ordem | combinações de flags | GET /news/highlights com notícias de teste | 200; apenas publicada=true e destaque=true; ordem crescente | — | — |
-| CT-02-05 | CA-02.4 | offset | limite inválido: -1 | GET /news?offset=-1 | 422; offset rejeitado | — | — |
-| CT-02-06 | CA-02.4 | offset | limite válido: 0 | GET /news?offset=0 | 200; offset aceito | — | — |
-| CT-02-07 | CA-02.4 | limit | limite inválido: 0 | GET /news?limit=0 | 422; limit rejeitado | — | — |
-| CT-02-08 | CA-02.4 | limit | limites válidos: 1 e 100 | GET /news?limit=1 e GET /news?limit=100 | 200 em ambos; no máximo o limite solicitado | — | — |
-| CT-02-09 | CA-02.4 | limit | limite inválido: 101 | GET /news?limit=101 | 422; limit rejeitado | — | — |
+| CT-02-01 | CA-02.1 | publicada | true e false | GET /news com uma publicada e outra rascunho | 200; apenas a publicada na lista | Sim | Sim |
+| CT-02-02 | CA-02.2 | news_id | publicada existente | GET /news/{id_publicada} | 200; dados da notícia | Parcial | Sim |
+| CT-02-03 | CA-02.2 | news_id | não publicada | GET /news/{id_rascunho} | 404; sem exposição do rascunho | Sim | Sim |
+| CT-02-04 | CA-02.3 | publicada; destaque; ordem | combinações de flags | GET /news/highlights com notícias de teste | 200; apenas publicada=true e destaque=true; ordem crescente | Parcial | Sim |
+| CT-02-05 | CA-02.4 | offset | limite inválido: -1 | GET /news?offset=-1 | 422; offset rejeitado | Sim | Sim |
+| CT-02-06 | CA-02.4 | offset | limite válido: 0 | GET /news?offset=0 | 200; offset aceito | Sim | Sim |
+| CT-02-07 | CA-02.4 | limit | limite inválido: 0 | GET /news?limit=0 | 422; limit rejeitado | Nao | Sim |
+| CT-02-08 | CA-02.4 | limit | limites válidos: 1 e 100 | GET /news?limit=1 e GET /news?limit=100 | 200 em ambos; no máximo o limite solicitado | Parcial | Sim |
+| CT-02-09 | CA-02.4 | limit | limite inválido: 101 | GET /news?limit=101 | 422; limit rejeitado | Sim | Sim |
 
 ### US-03
 
 | Caso | Critério | Variável | Partição / limite | Entrada / cenário | Resultado esperado (oráculo) | v1 | v2 |
 |---|---|---|---|---|---|:---:|:---:|
-| CT-03-01 | CA-03.1 | Authorization | ausente | POST /news com JSON válido e sem token | 401; autenticação necessária | — | — |
-| CT-03-02 | CA-03.1 | Authorization | válido | POST /news com token de admin de teste | 201; ação autorizada | — | — |
-| CT-03-03 | CA-03.2 | titulo | limite inválido: 0 caractere | POST /news com titulo="" | 422; título rejeitado | — | — |
-| CT-03-04 | CA-03.2 | titulo | limites válidos: 1 e 255 | POST /news, titulo com 1 e 255 caracteres | 201 nos dois casos | — | — |
-| CT-03-05 | CA-03.2 | titulo | limite inválido: 256 | POST /news, titulo com 256 caracteres | 422; título rejeitado | — | — |
-| CT-03-06 | CA-03.2 | conteudo | vazio | POST /news com conteudo="" | 422; conteúdo rejeitado | — | — |
-| CT-03-07 | CA-03.2 | ordem; publicada | ordem=-1 e ordem=0 | POST /news ordem=-1 e POST /news ordem=0 | 422 para -1; 201 para 0; publicada=false por padrão | — | — |
-| CT-03-08 | CA-03.3 | publicada | mudança false para true | PATCH /news/{id} com publicada=true | 200; GET /news/{id} passa a retornar 200 | — | — |
-| CT-03-09 | CA-03.3 | publicada | mudança true para false | PATCH /news/{id} com publicada=false | 200; GET /news/{id} passa a retornar 404 | — | — |
-| CT-03-10 | CA-03.3 | titulo | nulo explícito | PATCH /news/{id} com titulo=null | 422; campo nulo rejeitado | — | — |
-| CT-03-11 | CA-03.4 | news_id | existente | DELETE /news/{id_existente} com admin válido | 204; noticia removida | — | — |
-| CT-03-12 | CA-03.4 | news_id | inexistente | DELETE /news/{id_inexistente} com admin válido | 404; notícia não encontrada | — | — |
+| CT-03-01 | CA-03.1 | Authorization | ausente | POST /news com JSON válido e sem token | 401; autenticação necessária | Sim | Sim |
+| CT-03-02 | CA-03.1 | Authorization | válido | POST /news com token de admin de teste | 201; ação autorizada | Sim | Sim |
+| CT-03-03 | CA-03.2 | titulo | limite inválido: 0 caractere | POST /news com titulo="" | 422; título rejeitado | Sim | Sim |
+| CT-03-04 | CA-03.2 | titulo | limites válidos: 1 e 255 | POST /news, titulo com 1 e 255 caracteres | 201 nos dois casos | Sim | Sim |
+| CT-03-05 | CA-03.2 | titulo | limite inválido: 256 | POST /news, titulo com 256 caracteres | 422; título rejeitado | Sim | Sim |
+| CT-03-06 | CA-03.2 | conteudo | vazio | POST /news com conteudo="" | 422; conteúdo rejeitado | Sim | Sim |
+| CT-03-07 | CA-03.2 | ordem; publicada | ordem=-1 e ordem=0 | POST /news ordem=-1 e POST /news ordem=0 | 422 para -1; 201 para 0; publicada=false por padrão | Parcial | Sim |
+| CT-03-08 | CA-03.3 | publicada | mudança false para true | PATCH /news/{id} com publicada=true | 200; GET /news/{id} passa a retornar 200 | Sim | Sim |
+| CT-03-09 | CA-03.3 | publicada | mudança true para false | PATCH /news/{id} com publicada=false | 200; GET /news/{id} passa a retornar 404 | Sim | Sim |
+| CT-03-10 | CA-03.3 | titulo | nulo explícito | PATCH /news/{id} com titulo=null | 422; campo nulo rejeitado | Sim | Sim |
+| CT-03-11 | CA-03.4 | news_id | existente | DELETE /news/{id_existente} com admin válido | 204; noticia removida | Sim | Sim |
+| CT-03-12 | CA-03.4 | news_id | inexistente | DELETE /news/{id_inexistente} com admin válido | 404; notícia não encontrada | Sim | Sim |
 
 ## 5. Preparação, medições e registros pendentes
 
@@ -152,3 +152,30 @@ A matriz acima é um **plano de casos**, não uma suíte executada. Ao rodar cad
 ## Proveniência do planejamento
 
 Planejamento fornecido, revisado e aprovado pela responsável antes da geração da suíte v1. O planejamento teve apoio de IA. Os casos planejados não serão consultados durante a geração independente da v1; a comparação será realizada somente após preservá-la.
+
+## Resultados executados (substituem o estado pendente do plano inicial)
+
+# Comparacao v1 x v2
+
+| Indicador | v1 | v2 |
+|---|---|---|
+| Testes gerados/passam/falham/nao compilam | 25/25/0/0 | 78/78/0/0 |
+| Linhas | 79.46% (178/224) | 91.07% (204/224) |
+| Branches | 54.55% (24/44) | 88.64% (39/44) |
+| Criterios com ao menos um teste | 100% (12/12) | 100% (12/12) |
+| Particoes exercitadas | 91,67% (33/36) | 100% (36/36) |
+| Limites explicitamente enviados | 81,25% (13/16) | 100% (16/16) |
+| Sem assert / assert trivial | 0/0 | 0/0 |
+| Defeitos reais confirmados | 0 | 0 |
+| CTs completos/parciais/ausentes | 24/5/1 | 30/0/0 |
+| Funcoes apenas com oraculo HTTP | 8 | 12 |
+
+## Regra de contagem
+36 classes separando variaveis/estados do plano: US-01=9, US-02=13, US-03=14. Limites=16: page 0/1; ID 0/1; offset -1/0; limit 0/1/100/101; titulo 0/1/255/256; ordem -1/0. Default de ordem nao conta como zero explicitamente enviado. Particoes medem exercicio; requisitos seguem ao menos um teste por CA, nao exaustividade. Contagem dos CTs exige oraculo completo, por isso difere da cobertura de criterios.
+
+v1: faltavam flags false/false e true/false nos destaques e limit<1 (3 classes); limites 0 e 100 de limit e ordem=0 explicita. CT-01-02, CT-02-02, CT-02-04, CT-02-08 e CT-03-07 parciais; CT-02-07 ausente. Demais 24 CTs verificados por representantes equivalentes. v2 cobre os 30 CTs, 36 classes e 16 limites. As particoes adicionais de JSON/transporte/token caracterizam riscos existentes, nao criam requisitos.
+
+Status HTTP e oraculo significativo, nao assert trivial. Um oraculo v1 deriva de detalhe implementado (URL oficial exata em test_digital_links), nao literalmente do CA. Nao ha defeito real confirmado nem teste comprovadamente validando defeito. A revisao humana independente nao foi realizada pelo assistente.
+
+
+Matriz original no commit 8b72f31, v1 congelada em a7f259a. Resultados: relatorios/v1/index.html e relatorios/v2/index.html.

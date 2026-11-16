@@ -12,3 +12,13 @@ Contexto fornecido: histórias/12 critérios em requisitos-v1.md; código de bac
 Resposta integral de código: tests/v1-llm/test_stories.py e tests/conftest.py (preservados no commit da geração). O arquivo resposta-v1.md reproduz os dois arquivos integralmente.
 Ajustes na v1: nenhum. Uma rodada usada, limite máximo três. A infraestrutura de execução/cobertura não altera os testes.
 Resultados e diagnóstico: preenchidos após execução; nenhuma alegação de cobertura feita antes de medir.
+
+## Resultado rodada 1
+25/25 passaram; zero falhas ou erros de coleta. Nenhum ajuste de executabilidade: 1/3 rodadas. A matriz completa foi consultada somente apos preservar a v1 no Git.
+
+## Rodada 2 - v2
+Prompt integral:
+> Feche as lacunas da matriz: limit 0/100, ordem 0 explicita, combinacoes completas de flags, consulta sem busca e detalhe publicado com oraculos completos. Acrescente formatos, payloads invalidos, falhas de rede e tokens invalidos/expirados para melhorar branches. Preserve v1 e escopo dos seis modulos. Comente requisito/tecnica. Caracterize formatos, mensagens e paginacao publica/admin antes das refatoracoes.
+Resposta integral: tests/v2/test_stories_v2.py. 78/78 passaram; nenhum ajuste posterior.
+SHA256 v1: 280ea5e288370024c9eceb10f2ef9e91839ba581992c18549c16ad54238b29c5
+Modelo exato/snapshot nao exposto. Toda revisao desta execucao e assistida por IA; nao se declara revisao humana independente.

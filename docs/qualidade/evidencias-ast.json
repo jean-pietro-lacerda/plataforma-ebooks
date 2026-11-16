@@ -1,0 +1,187 @@
+{
+  "backend/app/services/gutendex.py": {
+    "functions": [
+      {
+        "name": "_pick_cover_url",
+        "line": 18,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "_pick_download_url",
+        "line": 22,
+        "lines": 11,
+        "decisions_ast": 4
+      },
+      {
+        "name": "normalize_book",
+        "line": 35,
+        "lines": 29,
+        "decisions_ast": 5
+      },
+      {
+        "name": "normalize_book_list",
+        "line": 66,
+        "lines": 13,
+        "decisions_ast": 1
+      },
+      {
+        "name": "_raise_service_unavailable",
+        "line": 81,
+        "lines": 5,
+        "decisions_ast": 0
+      },
+      {
+        "name": "_get_json",
+        "line": 88,
+        "lines": 49,
+        "decisions_ast": 8
+      },
+      {
+        "name": "fetch_books",
+        "line": 139,
+        "lines": 6,
+        "decisions_ast": 1
+      },
+      {
+        "name": "fetch_book_by_id",
+        "line": 147,
+        "lines": 6,
+        "decisions_ast": 1
+      }
+    ],
+    "imports": [
+      "from typing import Any, NoReturn",
+      "import httpx",
+      "from fastapi import HTTPException, status",
+      "from app.schemas.books import BookListResponse, BookResponse"
+    ],
+    "invalid_message_literals": 3
+  },
+  "backend/app/api/routes/news.py": {
+    "functions": [
+      {
+        "name": "find_news",
+        "line": 19,
+        "lines": 5,
+        "decisions_ast": 1
+      },
+      {
+        "name": "list_news",
+        "line": 27,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "list_highlights",
+        "line": 32,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "list_admin_news",
+        "line": 37,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "get_admin_news",
+        "line": 42,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "get_news",
+        "line": 47,
+        "lines": 2,
+        "decisions_ast": 0
+      },
+      {
+        "name": "create_news",
+        "line": 52,
+        "lines": 7,
+        "decisions_ast": 0
+      },
+      {
+        "name": "update_news",
+        "line": 62,
+        "lines": 6,
+        "decisions_ast": 0
+      },
+      {
+        "name": "delete_news",
+        "line": 71,
+        "lines": 4,
+        "decisions_ast": 0
+      },
+      {
+        "name": "upload_image",
+        "line": 78,
+        "lines": 15,
+        "decisions_ast": 1
+      },
+      {
+        "name": "get_image",
+        "line": 96,
+        "lines": 8,
+        "decisions_ast": 2
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "from fastapi import APIRouter, Depends, HTTPException, Query, Response, UploadFile",
+      "from fastapi.responses import FileResponse",
+      "from sqlalchemy import select",
+      "from sqlalchemy.orm import Session",
+      "from app.api.dependencies import get_current_admin",
+      "from app.core.config import settings",
+      "from app.db.database import get_db",
+      "from app.models.news import Noticia",
+      "from app.schemas.news import NewsCreate, NewsResponse, NewsUpdate",
+      "from app.services.news import apply_news_changes, save_image"
+    ],
+    "invalid_message_literals": 0
+  },
+  "backend/app/schemas/news.py": {
+    "functions": [
+      {
+        "name": "reject_null_fields",
+        "line": 22,
+        "lines": 4,
+        "decisions_ast": 1
+      }
+    ],
+    "imports": [
+      "from datetime import datetime",
+      "from pydantic import BaseModel, ConfigDict, Field, model_validator"
+    ],
+    "invalid_message_literals": 0
+  },
+  "backend/app/services/news.py": {
+    "functions": [
+      {
+        "name": "apply_news_changes",
+        "line": 16,
+        "lines": 5,
+        "decisions_ast": 2
+      },
+      {
+        "name": "save_image",
+        "line": 23,
+        "lines": 25,
+        "decisions_ast": 5
+      }
+    ],
+    "imports": [
+      "from datetime import datetime, timezone",
+      "from io import BytesIO",
+      "from pathlib import Path",
+      "from uuid import uuid4",
+      "import warnings",
+      "from fastapi import HTTPException, UploadFile",
+      "from PIL import Image, UnidentifiedImageError",
+      "from app.core.config import settings"
+    ],
+    "invalid_message_literals": 0
+  }
+}
