@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta, timezone
+
+import jwt
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -125,3 +128,37 @@ def test_profile_with_valid_token(client):
     assert response.status_code == 200
     assert response.json()["usuario"] == "admin-teste"
     assert "senha_hash" not in response.json()
+
+
+@pytest.mark.parametrize("headers", [
+    {"Authorization": "Bearer invalid"},
+    {"Authorization": "Basic invalid"},
+    {"Authorization": "Bearer"},
+])
+def test_profile_rejects_invalid_authorization(client, headers):
+    response = client.get("/auth/me", headers=headers)
+    assert response.status_code == 401
+    assert response.headers["www-authenticate"] == "Bearer"
+
+
+@pytest.mark.parametrize("payload", [
+    {}, {"usuario": "admin-teste"}, {"usuario": "", "senha": "senha"},
+    {"usuario": "x" * 101, "senha": "senha"},
+    {"usuario": "admin-teste", "senha": "x" * 129},
+])
+def test_login_validates_contract(client, payload):
+    assert client.post("/auth/login", json=payload).status_code == 422
+
+
+@pytest.mark.parametrize("subject,expires", [
+    ("1", -1), ("999999", 5), ("not-an-id", 5),
+])
+def test_profile_rejects_expired_or_unknown_session(client, subject, expires):
+    token = jwt.encode(
+        {"sub": subject, "exp": datetime.now(timezone.utc) + timedelta(minutes=expires)},
+        settings.jwt_secret_key,
+        algorithm=settings.jwt_algorithm,
+    )
+    response = client.get("/auth/me", headers={"Authorization": f"Bearer {token}"})
+    assert response.status_code == 401
+    assert "senha" not in response.json()

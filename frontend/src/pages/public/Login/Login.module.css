@@ -54,6 +54,9 @@
   padding: 15px;
 }
 .botaoLogin {
+  border: 0;
+  font-family: inherit;
+  font-size: 1rem;
  /* 1) center the button block inside the column form */
   align-self: center;
 
@@ -78,3 +81,6 @@
   cursor: pointer;
   margin-bottom: 2rem;
 }
+
+.botaoLogin:disabled { cursor: wait; opacity: 0.7; }
+.mensagem { padding: 15px; color: #713a20; }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './HeaderPublico.module.css';
+import { useAuth } from '../../auth/context';
 
 // Importa a imagem que você acabou de salvar na pasta assets
 import logoImg from '../../assets/logo-ebooks.png'; 
@@ -11,6 +12,7 @@ import loginIcon from '../../assets/icons/cabeca_icone.png';
 import duvidasIcon from '../../assets/icons/interrogacao_icone.png';
 
 export function HeaderPublico() {
+  const { admin } = useAuth();
   return (
     <header className={styles.headerContainer}>
       
@@ -34,9 +36,9 @@ export function HeaderPublico() {
             </Link>
           </li>
           <li className={styles.navItem}>
-            <Link to="/login" className={styles.navLink}>
+            <Link to={admin ? '/admin' : '/login'} className={styles.navLink}>
               <img src={loginIcon} alt="" className={styles.navIcon} />
-              Login
+              {admin ? 'Minha conta' : 'Login'}
             </Link>
           </li>
           <li className={styles.navItem}>
