@@ -7,9 +7,11 @@
   max-width: 1200px; 
   margin: 15px auto 0 auto;
 }
+.homeContainer > a { color: #427689; }
 
 /* --- Carrossel de Notícias --- */
 .carrossel {
+  background-color: #427689;
   position: relative;
   width: 100%;
   height: 400px;
@@ -40,6 +42,15 @@
   font-size: 2rem;
   margin: 0 0 10px 0;
   font-weight: normal;
+}
+
+.carrosselLink { color: inherit; text-decoration: none; }
+.carrosselLink:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+.aviso { padding: 30px; }
+@media (max-width: 600px) {
+  .carrosselOverlay { padding: 40px 20px 25px; }
+  .carrosselTitulo { font-size: 1.5rem; overflow-wrap: anywhere; }
+  .seta { padding: 8px 12px; }
 }
 
 .carrosselSubtitulo {

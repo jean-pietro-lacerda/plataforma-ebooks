@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './auth/AuthProvider';
+import { RequireAdmin } from './auth/RequireAdmin';
+import { MinhaConta } from './pages/admin/MinhaConta/MinhaConta';
+import { PainelNoticias } from './pages/admin/PainelNoticias/PainelNoticias';
+import { NoticiaDetalhes } from './pages/public/NoticiaDetalhes/NoticiaDetalhes';
+import { Noticias } from './pages/public/Noticias/Noticias';
 import './assets/global.css';
 
 // Importando o Cabeçalho e o Rodapé
@@ -17,6 +23,7 @@ import { LivroDetalhes } from './pages/public/LivroDetalhes/LivroDetalhes'; // <
 function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         
         {/* O Header fica fora das rotas para aparecer fixo em todas as telas */}
@@ -31,7 +38,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/esqueci-minha-senha" element={<EsqueciMinhaSenha />} />
             <Route path="/nova-senha" element={<NovaSenha />} />
+            <Route path="/noticias/:id" element={<NoticiaDetalhes />} />
+            <Route path="/noticias" element={<Noticias />} />
             <Route path="/livro/:id" element={<LivroDetalhes />} /> {/* <-- Nova rota aqui */}
+            <Route path="/admin" element={<RequireAdmin />}>
+              <Route index element={<MinhaConta />} />
+              <Route path="noticias" element={<PainelNoticias />} />
+            </Route>
+            <Route path="*" element={<section><h2>Página não encontrada</h2><Link to="/">Voltar ao início</Link></section>} />
           </Routes>
         </main>
 
@@ -39,6 +53,7 @@ function App() {
         <Footer />
         
       </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

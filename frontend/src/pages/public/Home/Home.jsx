@@ -1,69 +1,38 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useApiData } from '../../../hooks/useApiData';
+import { ImagemNoticia } from '../../../components/ImagemNoticia/ImagemNoticia';
 import styles from './Home.module.css';
 
-// Dados fictícios baseados no protótipo para preencher o carrossel
-const NOTICIAS = [
-  {
-    id: 1,
-    titulo: "Edital aberto para novas publicações",
-    subtitulo: "Clique aqui para ver o edital",
-    imagem: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1200&auto=format&fit=crop"
-  },
-  {
-    id: 2,
-    titulo: "Novos livros disponíveis na plataforma",
-    subtitulo: "25 novos livros foram publicados nesse domingo 20/09",
-    imagem: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    titulo: "Aluna da UFCA publica seu próprio livro",
-    subtitulo: "Aluna da UFCA escreveu e publicou um livro na nossa plataforma",
-    imagem: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop"
-  }
-];
-
 export function Home() {
-  // Estado para controlar qual notícia está a ser apresentada (começa no índice 0)
-  const [indiceAtual, setIndiceAtual] = useState(0);
-
-  // Função para avançar a imagem
-  const proximaNoticia = () => {
-    setIndiceAtual((indice) => (indice === NOTICIAS.length - 1 ? 0 : indice + 1));
-  };
-
-  // Função para recuar a imagem
-  const noticiaAnterior = () => {
-    setIndiceAtual((indice) => (indice === 0 ? NOTICIAS.length - 1 : indice - 1));
-  };
-
-  const noticiaEmDestaque = NOTICIAS[indiceAtual];
-
+  const { data: noticias, loading, error, reload } = useApiData('/news/highlights');
+  const [selected, setSelected] = useState(null);
+  const index = Math.max(0, noticias?.findIndex((item) => item.id === selected) ?? 0);
+  const noticia = noticias?.[index];
+  function mudar(delta) {
+    setSelected(noticias[(index + delta + noticias.length) % noticias.length].id);
+  }
   return (
     <div className={styles.homeContainer}>
-      
-      {/* Secção do Carrossel */}
-      <section className={styles.carrossel}>
-        <img 
-          src={noticiaEmDestaque.imagem} 
-          alt={noticiaEmDestaque.titulo} 
-          className={styles.carrosselImagem} 
-        />
-        
-        <div className={styles.carrosselOverlay}>
-          <h2 className={styles.carrosselTitulo}>{noticiaEmDestaque.titulo}</h2>
-          <p className={styles.carrosselSubtitulo}>{noticiaEmDestaque.subtitulo}</p>
-        </div>
-
-        <button onClick={noticiaAnterior} className={`${styles.seta} ${styles.setaEsquerda}`}>
-          &lt;
-        </button>
-        <button onClick={proximaNoticia} className={`${styles.seta} ${styles.setaDireita}`}>
-          &gt;
-        </button>
+      <section className={styles.carrossel} aria-label="Notícias em destaque" aria-busy={loading}>
+        {loading && <p role="status" className={styles.aviso}>Carregando destaques...</p>}
+        {error && <div role="alert" className={styles.aviso}><p>{error}</p><button type="button" onClick={reload}>Tentar novamente</button></div>}
+        {noticias?.length === 0 && <p role="status" className={styles.aviso}>Não há destaques publicados no momento.</p>}
+        {noticia && <>
+          <ImagemNoticia key={noticia.id + '-' + noticia.imagem_path} noticia={noticia} className={styles.carrosselImagem} />
+          <div className={styles.carrosselOverlay}>
+            <Link to={'/noticias/' + noticia.id} className={styles.carrosselLink}>
+              <h2 className={styles.carrosselTitulo}>{noticia.titulo}</h2>
+              <p className={styles.carrosselSubtitulo}>{noticia.conteudo.length > 180 ? noticia.conteudo.slice(0, 180) + '…' : noticia.conteudo}</p>
+            </Link>
+          </div>
+          {noticias.length > 1 && <>
+            <button type="button" aria-label="Notícia anterior" onClick={() => mudar(-1)} className={styles.seta + ' ' + styles.setaEsquerda}>&lt;</button>
+            <button type="button" aria-label="Próxima notícia" onClick={() => mudar(1)} className={styles.seta + ' ' + styles.setaDireita}>&gt;</button>
+          </>}
+        </>}
       </section>
-
-      {/* Secção de Apresentação Oficial */}
+      <Link to="/noticias">Ver todas as notícias</Link>
       <section className={styles.apresentacao}>
         <h3 className={styles.apresentacaoTitulo}>Apresentação</h3>
         <p className={styles.apresentacaoTexto}>
@@ -74,7 +43,6 @@ export function Home() {
           mundo de possibilidades a cada página!
         </p>
       </section>
-
     </div>
   );
 }

@@ -34,6 +34,11 @@
 }
 
 .temaItem {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  padding: 0;
   color: #555555;
   font-size: 1.15rem; /* Fontes dos temas maiores (era 1rem) */
   cursor: pointer;
@@ -48,6 +53,7 @@
 
 /* --- Conteúdo Principal (Busca e Grelha) --- */
 .conteudoPrincipal {
+  min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -69,11 +75,13 @@
 }
 
 .buscaContainer {
+  gap: 8px;
   /* Removemos o justify-content antigo daqui, pois o cabecalhoConteudo já faz o alinhamento */
   display: flex;
 }
 
 .inputBusca {
+  min-width: 0;
   width: 300px;
   padding: 10px 15px;
   border: 1px solid #cccccc;
@@ -92,4 +100,21 @@
   /* Cria colunas responsivas que se ajustam ao ecrã automaticamente */
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 30px;
+}
+
+.temaAtivo { color: #427689; font-weight: bold; }
+.botao { border: 0; border-radius: 4px; background: #427689; color: white; padding: 10px 15px; font: inherit; cursor: pointer; }
+.botao:disabled { opacity: 0.5; cursor: default; }
+.paginacao { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
+.rotuloBusca { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 1000px) {
+  .cabecalhoConteudo { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .buscaContainer { width: 100%; }
+  .inputBusca { flex: 1; width: 100%; }
+}
+@media (max-width: 700px) {
+  .catalogoContainer { flex-direction: column; gap: 25px; }
+  .sidebar { width: 100%; margin-left: 0; padding: 20px; }
+  .listaTemas { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  .conteudoPrincipal { width: 100%; }
 }
