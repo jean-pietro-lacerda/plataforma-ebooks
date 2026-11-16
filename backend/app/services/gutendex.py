@@ -32,14 +32,7 @@ def _pick_download_url(formats: dict[str, str]) -> str | None:
     return None
 
 
-def normalize_book(raw: dict[str, Any]) -> BookResponse:
-    if not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] <= 0:
-        raise ValueError("Identificador de livro inválido na resposta externa")
-    if raw.get("title") is not None and not isinstance(raw["title"], str):
-        raise ValueError("Título inválido na resposta externa")
-    if raw.get("authors") is not None and not isinstance(raw["authors"], list):
-        raise ValueError("Autores inválidos na resposta externa")
-    formats = raw.get("formats")
+def _normalize_formats(formats: Any) -> dict[str, str]:
     if formats is None:
         formats = {}
     if not isinstance(formats, dict) or any(
@@ -47,6 +40,17 @@ def normalize_book(raw: dict[str, Any]) -> BookResponse:
         for mime, url in formats.items()
     ):
         raise ValueError("Formatos inválidos na resposta externa")
+    return formats
+
+
+def normalize_book(raw: dict[str, Any]) -> BookResponse:
+    if not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] <= 0:
+        raise ValueError("Identificador de livro inválido na resposta externa")
+    if raw.get("title") is not None and not isinstance(raw["title"], str):
+        raise ValueError("Título inválido na resposta externa")
+    if raw.get("authors") is not None and not isinstance(raw["authors"], list):
+        raise ValueError("Autores inválidos na resposta externa")
+    formats = _normalize_formats(raw.get("formats"))
     authors = [
         author.get("name", "").strip()
         for author in (raw.get("authors") or [])
