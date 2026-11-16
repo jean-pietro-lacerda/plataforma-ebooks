@@ -10,6 +10,8 @@ import { Home } from './pages/public/Home/Home';
 import { Catalogo } from './pages/public/Catalogo/Catalogo';
 import { Faq } from './pages/public/Faq/Faq';
 import { Login } from './pages/public/Login/Login';
+import { EsqueciMinhaSenha } from './pages/public/EsqueciMinhaSenha/EsqueciMinhaSenha';
+import { NovaSenha } from './pages/public/NovaSenha/NovaSenha';
 import { LivroDetalhes } from './pages/public/LivroDetalhes/LivroDetalhes'; // <-- Novo import aqui
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/esqueci-minha-senha" element={<EsqueciMinhaSenha />} />
+            <Route path="/nova-senha" element={<NovaSenha />} />
             <Route path="/livro/:id" element={<LivroDetalhes />} /> {/* <-- Nova rota aqui */}
           </Routes>
         </main>
