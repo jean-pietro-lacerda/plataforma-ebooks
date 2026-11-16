@@ -1,0 +1,15 @@
+{
+  "phase": "DT-02",
+  "generated": 78,
+  "passed": 78,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "lines_hit": 207,
+  "lines_total": 227,
+  "branches_hit": 39,
+  "branches_total": 44,
+  "exit_code": 0,
+  "line_percent": 91.19,
+  "branch_percent": 88.64
+}

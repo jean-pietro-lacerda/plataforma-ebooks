@@ -8,6 +8,8 @@ from app.schemas.books import BookListResponse, BookResponse
 GUTENDEX_BASE_URL = "https://gutendex.com"
 GUTENDEX_TIMEOUT = httpx.Timeout(60.0, connect=10.0)
 
+INVALID_PAYLOAD_MESSAGE = "O serviço de livros (Gutendex) retornou uma resposta inválida."
+
 _DOWNLOAD_MIME_PREFERENCE = (
     "application/epub+zip",
     "text/html",
@@ -102,7 +104,7 @@ async def _get_json(path: str, params: dict[str, Any] | None = None) -> dict[str
             return data
 
     except ValueError:
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)
 
     except httpx.TimeoutException:
         _raise_service_unavailable(
@@ -145,7 +147,7 @@ async def fetch_books(params: dict[str, Any] | None = None) -> BookListResponse:
     try:
         return normalize_book_list(raw)
     except (KeyError, TypeError, AttributeError, ValueError):
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)
 
 
 async def fetch_book_by_id(book_id: int) -> BookResponse:
@@ -153,4 +155,4 @@ async def fetch_book_by_id(book_id: int) -> BookResponse:
     try:
         return normalize_book(raw)
     except (KeyError, TypeError, AttributeError, ValueError):
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)
