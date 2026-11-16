@@ -12,6 +12,7 @@ export function HeaderAdmin() {
   return (
     <nav className={styles.navigation} aria-label="Administração">
       <Link to="/admin">Minha conta</Link>
+      <Link to="/admin/noticias">Notícias</Link>
       <button type="button" onClick={sair}>Sair</button>
     </nav>
   );

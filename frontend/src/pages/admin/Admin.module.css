@@ -2,3 +2,15 @@
 .navigation { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; max-width: 1200px; margin: 0 auto 25px; }
 .navigation a { color: #427689; }
 .navigation button { font: inherit; background: #427689; color: white; border: 0; border-radius: 4px; padding: 8px 16px; cursor: pointer; }
+
+.editor { border: 1px solid #427689; border-top: 6px solid #427689; border-radius: 12px; padding: 20px; }
+.fields { border: 0; display: grid; gap: 12px; min-width: 0; }
+.fields input:not([type="checkbox"]), .fields textarea { width: 100%; min-width: 0; padding: 10px; font: inherit; border: 1px solid #aaa; border-radius: 4px; }
+.fields textarea { resize: vertical; }
+.checkbox { display: flex; align-items: center; gap: 8px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.actions button, .editor button, .container > button { border: 0; border-radius: 4px; padding: 10px 15px; background: #427689; color: white; font: inherit; cursor: pointer; }
+.container button:disabled { cursor: default; opacity: 0.5; }
+.items { display: grid; gap: 15px; }
+.item { display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; overflow-wrap: anywhere; }
+.message { color: #713a20; }

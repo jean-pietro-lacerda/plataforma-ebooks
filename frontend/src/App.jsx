@@ -2,6 +2,8 @@ import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthProvider';
 import { RequireAdmin } from './auth/RequireAdmin';
 import { MinhaConta } from './pages/admin/MinhaConta/MinhaConta';
+import { PainelNoticias } from './pages/admin/PainelNoticias/PainelNoticias';
+import { NoticiaDetalhes } from './pages/public/NoticiaDetalhes/NoticiaDetalhes';
 import './assets/global.css';
 
 // Importando o Cabeçalho e o Rodapé
@@ -35,9 +37,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/esqueci-minha-senha" element={<EsqueciMinhaSenha />} />
             <Route path="/nova-senha" element={<NovaSenha />} />
+            <Route path="/noticias/:id" element={<NoticiaDetalhes />} />
             <Route path="/livro/:id" element={<LivroDetalhes />} /> {/* <-- Nova rota aqui */}
             <Route path="/admin" element={<RequireAdmin />}>
               <Route index element={<MinhaConta />} />
+              <Route path="noticias" element={<PainelNoticias />} />
             </Route>
             <Route path="*" element={<section><h2>Página não encontrada</h2><Link to="/">Voltar ao início</Link></section>} />
           </Routes>
