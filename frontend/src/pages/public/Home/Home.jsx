@@ -32,6 +32,7 @@ export function Home() {
           </>}
         </>}
       </section>
+      <Link to="/noticias">Ver todas as notícias</Link>
       <section className={styles.apresentacao}>
         <h3 className={styles.apresentacaoTitulo}>Apresentação</h3>
         <p className={styles.apresentacaoTexto}>

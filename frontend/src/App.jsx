@@ -4,6 +4,7 @@ import { RequireAdmin } from './auth/RequireAdmin';
 import { MinhaConta } from './pages/admin/MinhaConta/MinhaConta';
 import { PainelNoticias } from './pages/admin/PainelNoticias/PainelNoticias';
 import { NoticiaDetalhes } from './pages/public/NoticiaDetalhes/NoticiaDetalhes';
+import { Noticias } from './pages/public/Noticias/Noticias';
 import './assets/global.css';
 
 // Importando o Cabeçalho e o Rodapé
@@ -38,6 +39,7 @@ function App() {
             <Route path="/esqueci-minha-senha" element={<EsqueciMinhaSenha />} />
             <Route path="/nova-senha" element={<NovaSenha />} />
             <Route path="/noticias/:id" element={<NoticiaDetalhes />} />
+            <Route path="/noticias" element={<Noticias />} />
             <Route path="/livro/:id" element={<LivroDetalhes />} /> {/* <-- Nova rota aqui */}
             <Route path="/admin" element={<RequireAdmin />}>
               <Route index element={<MinhaConta />} />

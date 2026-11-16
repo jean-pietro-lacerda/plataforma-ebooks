@@ -7,6 +7,7 @@
   max-width: 1200px; 
   margin: 15px auto 0 auto;
 }
+.homeContainer > a { color: #427689; }
 
 /* --- Carrossel de Notícias --- */
 .carrossel {
