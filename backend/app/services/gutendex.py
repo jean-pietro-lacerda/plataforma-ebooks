@@ -8,6 +8,8 @@ from app.schemas.books import BookListResponse, BookResponse
 GUTENDEX_BASE_URL = "https://gutendex.com"
 GUTENDEX_TIMEOUT = httpx.Timeout(60.0, connect=10.0)
 
+INVALID_PAYLOAD_MESSAGE = "O serviço de livros (Gutendex) retornou uma resposta inválida."
+
 _DOWNLOAD_MIME_PREFERENCE = (
     "application/epub+zip",
     "text/html",
@@ -32,14 +34,7 @@ def _pick_download_url(formats: dict[str, str]) -> str | None:
     return None
 
 
-def normalize_book(raw: dict[str, Any]) -> BookResponse:
-    if not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] <= 0:
-        raise ValueError("Identificador de livro inválido na resposta externa")
-    if raw.get("title") is not None and not isinstance(raw["title"], str):
-        raise ValueError("Título inválido na resposta externa")
-    if raw.get("authors") is not None and not isinstance(raw["authors"], list):
-        raise ValueError("Autores inválidos na resposta externa")
-    formats = raw.get("formats")
+def _normalize_formats(formats: Any) -> dict[str, str]:
     if formats is None:
         formats = {}
     if not isinstance(formats, dict) or any(
@@ -47,6 +42,17 @@ def normalize_book(raw: dict[str, Any]) -> BookResponse:
         for mime, url in formats.items()
     ):
         raise ValueError("Formatos inválidos na resposta externa")
+    return formats
+
+
+def normalize_book(raw: dict[str, Any]) -> BookResponse:
+    if not isinstance(raw, dict) or type(raw.get("id")) is not int or raw["id"] <= 0:
+        raise ValueError("Identificador de livro inválido na resposta externa")
+    if raw.get("title") is not None and not isinstance(raw["title"], str):
+        raise ValueError("Título inválido na resposta externa")
+    if raw.get("authors") is not None and not isinstance(raw["authors"], list):
+        raise ValueError("Autores inválidos na resposta externa")
+    formats = _normalize_formats(raw.get("formats"))
     authors = [
         author.get("name", "").strip()
         for author in (raw.get("authors") or [])
@@ -98,7 +104,7 @@ async def _get_json(path: str, params: dict[str, Any] | None = None) -> dict[str
             return data
 
     except ValueError:
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)
 
     except httpx.TimeoutException:
         _raise_service_unavailable(
@@ -141,7 +147,7 @@ async def fetch_books(params: dict[str, Any] | None = None) -> BookListResponse:
     try:
         return normalize_book_list(raw)
     except (KeyError, TypeError, AttributeError, ValueError):
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)
 
 
 async def fetch_book_by_id(book_id: int) -> BookResponse:
@@ -149,4 +155,4 @@ async def fetch_book_by_id(book_id: int) -> BookResponse:
     try:
         return normalize_book(raw)
     except (KeyError, TypeError, AttributeError, ValueError):
-        _raise_service_unavailable("O serviço de livros (Gutendex) retornou uma resposta inválida.")
+        _raise_service_unavailable(INVALID_PAYLOAD_MESSAGE)

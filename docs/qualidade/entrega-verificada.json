@@ -1,0 +1,17 @@
+{
+  "pdfs": {
+    "docs\\testes\\relatorio-critico.pdf": {
+      "pages": 4,
+      "bytes": 6961
+    },
+    "docs\\qualidade\\relatorio-refatoracao.pdf": {
+      "pages": 3,
+      "bytes": 6018
+    }
+  },
+  "refactor_commits": {
+    "DT-03": "df44893",
+    "DT-02": "37a00eb",
+    "DT-01": "d23fd15"
+  }
+}

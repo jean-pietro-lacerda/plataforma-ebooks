@@ -1,0 +1,10 @@
+Name                               Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------------
+backend\app\api\dependencies.py       22      0      6      0   100%
+backend\app\api\routes\books.py       18      0      4      0   100%
+backend\app\api\routes\news.py        77     20      6      0    71%   79-92, 97-103
+backend\app\schemas\books.py          13      0      0      0   100%
+backend\app\schemas\news.py           21      0      2      0   100%
+backend\app\services\gutendex.py      76      0     26      1    99%   31->30
+------------------------------------------------------------------------------
+TOTAL                                227     20     44      1    91%

@@ -1,0 +1,15 @@
+{
+  "phase": "v1",
+  "generated": 25,
+  "passed": 25,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "lines_hit": 178,
+  "lines_total": 224,
+  "branches_hit": 24,
+  "branches_total": 44,
+  "exit_code": 0,
+  "line_percent": 79.46,
+  "branch_percent": 54.55
+}

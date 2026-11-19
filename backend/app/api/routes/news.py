@@ -14,6 +14,7 @@ from app.services.news import apply_news_changes, save_image
 
 router = APIRouter(prefix="/news", tags=["Notícias"])
 admin_only = [Depends(get_current_admin)]
+MAX_NEWS_PAGE_SIZE = 100
 
 
 def find_news(db, news_id, public=False):
@@ -24,7 +25,7 @@ def find_news(db, news_id, public=False):
 
 
 @router.get("", response_model=list[NewsResponse])
-def list_news(db: Session = Depends(get_db), offset: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=100)):
+def list_news(db: Session = Depends(get_db), offset: int = Query(0, ge=0), limit: int = Query(MAX_NEWS_PAGE_SIZE, ge=1, le=MAX_NEWS_PAGE_SIZE)):
     return db.scalars(select(Noticia).where(Noticia.publicada.is_(True)).order_by(Noticia.data_publicacao.desc(), Noticia.id.desc()).offset(offset).limit(limit)).all()
 
 
@@ -34,7 +35,7 @@ def list_highlights(db: Session = Depends(get_db)):
 
 
 @router.get("/admin", response_model=list[NewsResponse], dependencies=admin_only)
-def list_admin_news(db: Session = Depends(get_db), offset: int = Query(0, ge=0), limit: int = Query(100, ge=1, le=100)):
+def list_admin_news(db: Session = Depends(get_db), offset: int = Query(0, ge=0), limit: int = Query(MAX_NEWS_PAGE_SIZE, ge=1, le=MAX_NEWS_PAGE_SIZE)):
     return db.scalars(select(Noticia).order_by(Noticia.id.desc()).offset(offset).limit(limit)).all()
 
 
